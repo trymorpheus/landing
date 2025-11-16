@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Try Morpheus - Build Apps Without Code</title>
+    <meta name="description" content="From blog to enterprise platform. No limits. 40x faster than WordPress.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Try Morpheus">
+    <meta property="og:description" content="Build apps without code">
+    <meta property="og:image" content="https://trymorpheus.io/og-image.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+        .form {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        input {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            min-width: 250px;
+        }
+        button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: #FF0040;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .counter {
+            margin-top: 2rem;
+            opacity: 0.9;
+        }
+        .pills {
+            font-size: 2rem;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pills">🔴💊</div>
+        <h1>Try Morpheus</h1>
+        <p class="subtitle">Build apps without code. From blog to enterprise platform.</p>
+        <p class="subtitle">40x faster than WordPress. No plugins. No limits.</p>
+        
+        <form class="form" id="waitlist">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Join Waitlist</button>
+        </form>
+        
+        <div class="counter">
+            <p>👥 <span id="count">287</span> developers waiting</p>
+        </div>
+    </div>
+    
+    <script>
+        // Simple waitlist
+        document.getElementById('waitlist').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = e.target[0].value;
+            
+            // Por ahora, guarda en localStorage
+            const waitlist = JSON.parse(localStorage.getItem('morpheus_waitlist') || '[]');
+            waitlist.push({email, date: new Date()});
+            localStorage.setItem('morpheus_waitlist', JSON.stringify(waitlist));
+            
+            // Update counter
+            document.getElementById('count').textContent = 287 + waitlist.length;
+            
+            // Show success
+            e.target.innerHTML = '<p>✅ You\'re in! We\'ll email you soon.</p>';
+        });
+    </script>
+</body>
+</html>
