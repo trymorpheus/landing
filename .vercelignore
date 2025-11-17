@@ -1,0 +1,5 @@
+# Vercel ignore file
+# Only ignore what we don't want to deploy
+node_modules/
+.git/
+*.log
