@@ -261,14 +261,29 @@
             font-size: 0.9rem;
         }
         
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
         .footer a {
             color: white;
             text-decoration: none;
-            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
         }
         
         .footer a:hover {
             opacity: 1;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
         
         /* Mobile Responsive */
@@ -302,6 +317,15 @@
             .features-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
+            }
+            
+            .social-links {
+                gap: 0.5rem;
+            }
+            
+            .footer a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
             }
         }
         
@@ -425,12 +449,17 @@
     
     <!-- Footer -->
     <footer class="footer">
-        <p>
-            <a href="https://github.com/trymorpheus/morpheus" target="_blank">GitHub</a>
-            <a href="https://packagist.org/packages/trymorpheus/morpheus" target="_blank">Packagist</a>
-            <a href="https://x.com/TryMorpheus" target="_blank">Twitter</a>
-        </p>
-        <p style="margin-top: 1rem; opacity: 0.5;">Made with ❤️ by Mario Raúl Carbonell Martínez</p>
+        <div class="social-links">
+            <a href="https://github.com/trymorpheus/morpheus" target="_blank" title="GitHub">GitHub</a>
+            <a href="https://packagist.org/packages/trymorpheus/morpheus" target="_blank" title="Packagist">Packagist</a>
+            <a href="https://x.com/TryMorpheus" target="_blank" title="Twitter/X">Twitter</a>
+            <a href="https://www.linkedin.com/in/trymorpheus/" target="_blank" title="LinkedIn">LinkedIn</a>
+            <a href="https://www.youtube.com/@trymorpheus" target="_blank" title="YouTube">YouTube</a>
+            <a href="https://www.tiktok.com/@trymorpheus" target="_blank" title="TikTok">TikTok</a>
+            <a href="https://www.instagram.com/trymorpheus/" target="_blank" title="Instagram">Instagram</a>
+            <a href="https://www.producthunt.com/@trymorpheus" target="_blank" title="Product Hunt">Product Hunt</a>
+        </div>
+        <p style="margin-top: 1.5rem; opacity: 0.5;">Made with ❤️ by Mario Raúl Carbonell Martínez</p>
     </footer>
     
     <script>
