@@ -2,112 +2,487 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Try Morpheus - Build Apps Without Code</title>
-    <meta name="description" content="From blog to enterprise platform. No limits. 40x faster than WordPress.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpheus - The Universal CMS</title>
+    <meta name="description" content="Start as a blog, grow into anything. 40x faster than WordPress. No plugins, no limits.">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Try Morpheus">
-    <meta property="og:description" content="Build apps without code">
-    <meta property="og:image" content="https://trymorpheus.io/og-image.png">
+    <meta property="og:title" content="Morpheus - The Universal CMS">
+    <meta property="og:description" content="Start as a blog, grow into anything. 40x faster than WordPress.">
+    <meta property="og:image" content="https://trymorpheus.dev/og-image.png">
+    <meta property="og:url" content="https://trymorpheus.dev">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Morpheus - The Universal CMS">
+    <meta name="twitter:description" content="Start as a blog, grow into anything. 40x faster than WordPress.">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
             color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Hero Section */
+        .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .container {
             text-align: center;
             padding: 2rem;
-            max-width: 600px;
         }
-        h1 {
-            font-size: 3rem;
+        
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo {
+            font-size: 4rem;
             margin-bottom: 1rem;
-            background: linear-gradient(90deg, #fff, #f0f0f0);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, #f0f0f0, #fff);
+            background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shimmer 3s ease-in-out infinite;
         }
-        .subtitle {
-            font-size: 1.25rem;
+        
+        @keyframes shimmer {
+            0%, 100% { background-position: -200% 0; }
+            50% { background-position: 200% 0; }
+        }
+        
+        .tagline {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
             opacity: 0.95;
-            margin-bottom: 2rem;
         }
-        .form {
+        
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            opacity: 0.85;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Form */
+        .waitlist-form {
             display: flex;
             gap: 1rem;
             justify-content: center;
+            margin: 3rem 0;
             flex-wrap: wrap;
         }
-        input {
-            padding: 1rem 1.5rem;
+        
+        .email-input {
+            padding: 1.2rem 1.5rem;
             border: none;
             border-radius: 50px;
             font-size: 1rem;
-            min-width: 250px;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            transition: all 0.3s ease;
         }
-        button {
-            padding: 1rem 2rem;
+        
+        .email-input:focus {
+            outline: none;
+            background: white;
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button {
+            padding: 1.2rem 2.5rem;
             border: none;
             border-radius: 50px;
-            background: #FF0040;
+            background: linear-gradient(45deg, #FF0040, #FF4081);
             color: white;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 0, 64, 0.3);
         }
-        button:hover {
-            transform: scale(1.05);
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 0, 64, 0.4);
         }
+        
         .counter {
             margin-top: 2rem;
             opacity: 0.9;
+            font-size: 1.1rem;
         }
-        .pills {
-            font-size: 2rem;
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .features-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-desc {
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        
+        .footer a:hover {
+            opacity: 1;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 1rem;
+            }
+            
+            .stats {
+                gap: 1rem;
+            }
+            
+            .stat {
+                min-width: 100px;
+                padding: 0.8rem;
+            }
+            
+            .waitlist-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .email-input {
+                min-width: 280px;
+            }
+            
+            .features {
+                padding: 2rem 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Success state */
+        .success {
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            padding: 2rem;
+            border-radius: 20px;
             margin: 2rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="pills">🔴💊</div>
-        <h1>Try Morpheus</h1>
-        <p class="subtitle">Build apps without code. From blog to enterprise platform.</p>
-        <p class="subtitle">40x faster than WordPress. No plugins. No limits.</p>
-        
-        <form class="form" id="waitlist">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit">Join Waitlist</button>
-        </form>
-        
-        <div class="counter">
-            <p>👥 <span id="count">287</span> developers waiting</p>
+    <div class="bg-animation"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">🔴💊</div>
+            <h1>Morpheus</h1>
+            <p class="tagline">The Universal CMS</p>
+            <p class="subtitle">
+                Start as a blog in 60 seconds, grow into e-commerce, CRM, or any custom application.<br>
+                <strong>40x faster than WordPress. No plugins. No limits.</strong>
+            </p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">40x</span>
+                    <span class="stat-label">Faster</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">0</span>
+                    <span class="stat-label">Plugins</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">60s</span>
+                    <span class="stat-label">Setup</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Possibilities</span>
+                </div>
+            </div>
+            
+            <form class="waitlist-form" id="waitlist">
+                <input type="email" class="email-input" placeholder="Enter your email" required>
+                <button type="submit" class="cta-button">Join Waitlist</button>
+            </form>
+            
+            <div class="counter">
+                <p>👥 <span id="count">287</span> developers waiting</p>
+            </div>
         </div>
-    </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <h2 class="features-title">Why Choose Morpheus?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-desc">
+                        Homepage loads in ~50ms vs 2-3s for WordPress. 
+                        No plugin overhead, optimized queries, efficient caching.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Zero Configuration</h3>
+                    <p class="feature-desc">
+                        Automatically generates forms from your database schema. 
+                        No migrations, no setup files, just pure magic.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3 class="feature-title">Grows With You</h3>
+                    <p class="feature-desc">
+                        Start with a blog, expand to e-commerce, CRM, or any custom app. 
+                        No limits, no rewrites.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Secure by Default</h3>
+                    <p class="feature-desc">
+                        Built-in CSRF protection, SQL injection prevention, 
+                        XSS protection. No plugins = no vulnerabilities.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍💻</div>
+                    <h3 class="feature-title">Developer Friendly</h3>
+                    <p class="feature-desc">
+                        3 lines of code for basic CRUD. Extensive hooks, 
+                        REST API generation, CLI tools.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Beautiful Themes</h3>
+                    <p class="feature-desc">
+                        Professional themes included. Hot-swap without data loss. 
+                        Custom themes with simple PHP.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            <a href="https://github.com/trymorpheus/morpheus" target="_blank">GitHub</a>
+            <a href="https://packagist.org/packages/trymorpheus/morpheus" target="_blank">Packagist</a>
+            <a href="https://x.com/TryMorpheus" target="_blank">Twitter</a>
+        </p>
+        <p style="margin-top: 1rem; opacity: 0.5;">Made with ❤️ by Mario Raúl Carbonell Martínez</p>
+    </footer>
     
     <script>
-        // Simple waitlist
+        // Enhanced waitlist with animations
         document.getElementById('waitlist').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = e.target[0].value;
+            const button = e.target.querySelector('.cta-button');
             
-            // Por ahora, guarda en localStorage
+            // Loading state
+            button.innerHTML = '⏳ Joining...';
+            button.disabled = true;
+            
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Save to localStorage
             const waitlist = JSON.parse(localStorage.getItem('morpheus_waitlist') || '[]');
-            waitlist.push({email, date: new Date()});
-            localStorage.setItem('morpheus_waitlist', JSON.stringify(waitlist));
+            if (!waitlist.find(item => item.email === email)) {
+                waitlist.push({email, date: new Date().toISOString()});
+                localStorage.setItem('morpheus_waitlist', JSON.stringify(waitlist));
+            }
             
-            // Update counter
-            document.getElementById('count').textContent = 287 + waitlist.length;
+            // Update counter with animation
+            const countEl = document.getElementById('count');
+            const newCount = 287 + waitlist.length;
+            countEl.style.transform = 'scale(1.2)';
+            countEl.textContent = newCount;
+            setTimeout(() => {
+                countEl.style.transform = 'scale(1)';
+            }, 200);
             
             // Show success
-            e.target.innerHTML = '<p>✅ You\'re in! We\'ll email you soon.</p>';
+            e.target.innerHTML = `
+                <div class="success">
+                    ✅ Welcome to the future! We'll email you when Morpheus launches.
+                </div>
+            `;
+        });
+        
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate stats on scroll
+            const stats = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'pulse 1s ease-in-out';
+                    }
+                });
+            });
+            
+            stats.forEach(stat => observer.observe(stat));
+            
+            // Update counter from localStorage
+            const waitlist = JSON.parse(localStorage.getItem('morpheus_waitlist') || '[]');
+            if (waitlist.length > 0) {
+                document.getElementById('count').textContent = 287 + waitlist.length;
+            }
         });
     </script>
 </body>
